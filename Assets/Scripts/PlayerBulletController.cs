@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerBulletController : BulletController
 {
-    public float strength = 1f;
-
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Enemy")

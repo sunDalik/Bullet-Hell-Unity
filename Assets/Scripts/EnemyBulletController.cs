@@ -6,6 +6,16 @@ public class EnemyBulletController : BulletController
 {
     public override void move()
     {
-        transform.Translate(new Vector3(-1, 0, 0) * movementSpeed * Time.deltaTime);
+        transform.Translate(new Vector3(0, 0, 1) * movementSpeed * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Player player = other.gameObject.GetComponent<Player>();
+            player.damage();
+            Destroy(gameObject);
+        }
     }
 }

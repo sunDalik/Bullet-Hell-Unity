@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float movementSpeed = 0.05f;
-    public BowController weapon;
+    public Shooter weapon;
     public CameraScript cameraObject;
     private int maxHealth = 5;
     private int health;
@@ -40,11 +40,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            weapon.startShooting();
+            weapon.shooting = true;
         }
         else
         {
-            weapon.stopShooting();
+            weapon.shooting = false;
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         updateIFrames();
     }
 
-    void damage()
+    public void damage()
     {
         if (currentIFrame > 0) return;
         health--;
@@ -94,6 +94,6 @@ public class Player : MonoBehaviour
 
     void die()
     {
-
+        Destroy(gameObject);
     }
 }

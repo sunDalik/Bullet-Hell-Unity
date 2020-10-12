@@ -2,25 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowController : MonoBehaviour
+public class Shooter : MonoBehaviour
 {
-
-    public ArrowController arrowPrefab;
-    private bool shooting = false;
+    public BulletController bullet;
+    public bool shooting = false;
     private float shootingDelay = 0.3f;
     private float currentShootingDelay = 0f;
     private float shootingSpeed = 30f;
     private float ownStrength = 1f;
-
-    public void startShooting()
-    {
-        shooting = true;
-    }
-
-    public void stopShooting()
-    {
-        shooting = false;
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,15 +25,15 @@ public class BowController : MonoBehaviour
             if (currentShootingDelay <= 0)
             {
                 currentShootingDelay = shootingDelay;
-                createArrow();
+                createBullet();
             }
         }
     }
 
-    private void createArrow()
+    private void createBullet()
     {
-        ArrowController newArrow = Instantiate(arrowPrefab, transform.position, transform.rotation);
-        newArrow.movementSpeed = shootingSpeed;
-        newArrow.strength = ownStrength;
+        BulletController newBullet = Instantiate(bullet, transform.position, transform.rotation);
+        newBullet.movementSpeed = shootingSpeed;
+        newBullet.strength = ownStrength;
     }
 }
