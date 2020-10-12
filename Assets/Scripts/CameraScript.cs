@@ -9,6 +9,8 @@ public class CameraScript : MonoBehaviour
     public float height = 12f;
     public float zOffset = -2f;
     private Vector3 velocity = Vector3.zero;
+    private float currentShakeScreenDuration = 0;
+    private float shakeIntensity = 0.2f;
 
     void Start()
     {
@@ -31,5 +33,24 @@ public class CameraScript : MonoBehaviour
 
         Vector3 newPos = new Vector3((mousePos.x + playerPos.x * 2) / 3, player.position.y + height, (mousePos.z + playerPos.z * 2) / 3);
         transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, smoothTime);
+
+        if (currentShakeScreenDuration > 0)
+        {
+            shakeCamera();
+            currentShakeScreenDuration -= Time.deltaTime;
+        }
+    }
+
+    public void shake(float duration = 0.2f)
+    {
+        currentShakeScreenDuration = duration;
+    }
+
+    private void shakeCamera()
+    {
+        Vector3 newPos = transform.position;
+        newPos.x += Random.Range(-shakeIntensity, shakeIntensity);
+        newPos.z += Random.Range(-shakeIntensity, shakeIntensity);
+        transform.position = newPos;
     }
 }

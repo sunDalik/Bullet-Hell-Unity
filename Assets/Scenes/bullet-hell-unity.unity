@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1386482131}
-  smoothTime: 0.15
+  smoothTime: 0.08
   height: 12
   zOffset: -2
 --- !u!1 &1313064206
@@ -516,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0.05
   weapon: {fileID: 3638374777487532224}
+  cameraObject: {fileID: 1054033615}
 --- !u!43 &1443252171
 Mesh:
   m_ObjectHideFlags: 0

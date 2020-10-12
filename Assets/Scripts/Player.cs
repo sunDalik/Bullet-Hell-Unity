@@ -6,11 +6,12 @@ public class Player : MonoBehaviour
 {
     public float movementSpeed = 0.05f;
     public BowController weapon;
+    public CameraScript cameraObject;
     private int maxHealth = 5;
     private int health;
-    private const float IFrameTime = 1f;
+    private const float IFrameTime = 0.7f;
     private float currentIFrame = 0;
-    private const float IFlashPeriod = IFrameTime / 3.5f;
+    private const float IFlashPeriod = IFrameTime / 3f;
     private float currentIFlashTime = 0f;
 
     void Start()
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
     {
         if (currentIFrame > 0) return;
         health--;
+        cameraObject.shake();
         if (health <= 0)
         {
             die();
