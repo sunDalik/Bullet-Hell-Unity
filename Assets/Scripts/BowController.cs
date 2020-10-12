@@ -10,6 +10,7 @@ public class BowController : MonoBehaviour
     private float shootingDelay = 0.3f;
     private float currentShootingDelay = 0f;
     private float shootingSpeed = 30f;
+    private float ownStrength = 1f;
 
     public void startShooting()
     {
@@ -44,5 +45,6 @@ public class BowController : MonoBehaviour
     {
         ArrowController newArrow = Instantiate(arrowPrefab, transform.position, transform.rotation);
         newArrow.movementSpeed = shootingSpeed;
+        newArrow.strength = ownStrength;
     }
 }
