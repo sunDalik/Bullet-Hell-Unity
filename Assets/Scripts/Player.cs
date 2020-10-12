@@ -6,6 +6,17 @@ public class Player : MonoBehaviour
 {
     public float movementSpeed = 0.05f;
     public BowController weapon;
+    private int maxHealth = 5;
+    private int health;
+    private const float IFrameTime = 1f;
+    private float currentIFrame = 0;
+    private const float IFlashPeriod = IFrameTime / 3.5f;
+    private float currentIFlashTime = 0f;
+
+    void Start()
+    {
+        health = maxHealth;
+    }
 
     void Update()
     {
@@ -34,5 +45,53 @@ public class Player : MonoBehaviour
         {
             weapon.stopShooting();
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            damage();
+        }
+
+        updateIFrames();
+    }
+
+    void damage()
+    {
+        if (currentIFrame > 0) return;
+        health--;
+        if (health <= 0)
+        {
+            die();
+        }
+        else
+        {
+            currentIFrame = IFrameTime;
+        }
+    }
+
+    void updateIFrames()
+    {
+        currentIFrame -= Time.deltaTime;
+        currentIFlashTime -= Time.deltaTime;
+        if (currentIFrame > 0)
+        {
+            if (currentIFlashTime <= 0) currentIFlashTime = IFlashPeriod;
+            if (currentIFlashTime >= IFlashPeriod / 2)
+            {
+                GetComponent<Renderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<Renderer>().enabled = true;
+            }
+        }
+        else
+        {
+            GetComponent<Renderer>().enabled = true;
+        }
+    }
+
+    void die()
+    {
+
     }
 }
