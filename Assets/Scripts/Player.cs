@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float movementSpeed = 0.2f;
-    public GameObject cameraObject;
+    public float movementSpeed = 0.05f;
+    public BowController weapon;
 
     void Update()
     {
@@ -18,12 +18,21 @@ public class Player : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
             targetRotation.x = 0;
             targetRotation.z = 0;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 7f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
         }
 
         Vector3 position = transform.position;
-        position.z += Input.GetAxis("Vertical") * movementSpeed;
-        position.x += Input.GetAxis("Horizontal") * movementSpeed;
+        position.z += Input.GetAxisRaw("Vertical") * movementSpeed;
+        position.x += Input.GetAxisRaw("Horizontal") * movementSpeed;
         transform.position = position;
+
+        if (Input.GetMouseButton(0))
+        {
+            weapon.startShooting();
+        }
+        else
+        {
+            weapon.stopShooting();
+        }
     }
 }

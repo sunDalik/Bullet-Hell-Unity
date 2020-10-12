@@ -6,8 +6,8 @@ public class CameraScript : MonoBehaviour
 {
     public Transform player;
     public float smoothTime = 0.15f;
-    public float height = 8f;
-    public float zOffset = -3f;
+    public float height = 12f;
+    public float zOffset = -2f;
     private Vector3 velocity = Vector3.zero;
 
     void Start()
