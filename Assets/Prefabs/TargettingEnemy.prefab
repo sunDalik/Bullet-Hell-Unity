@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 7223371024242466478}
   - component: {fileID: 7223371024242466477}
   - component: {fileID: 7223371024242466466}
+  - component: {fileID: 4651626148173649538}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: TargettingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8abc894c65bc864bb7374f3ccef421c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 4144572532397490132, guid: 69bc68b73b60191479b7c6396152722d, type: 3}
 --- !u!54 &7223371024242466466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,3 +125,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4651626148173649538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223371024242466476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de9106213c96be49b3bc69baf540600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4144572532397490132, guid: 69bc68b73b60191479b7c6396152722d, type: 3}
+  shooting: 0

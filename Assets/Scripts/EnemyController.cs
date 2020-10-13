@@ -6,15 +6,12 @@ public class EnemyController : MonoBehaviour
 {
     private float maxHealth = 5f;
     private float health;
-    private float shootingDelay = 0.7f;
-    private float currentShootingDelay = 0f;
-    private float shootingSpeed = 10f;
-    public BulletController bullet;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        startShootingAll();
     }
 
     // Update is called once per frame
@@ -27,16 +24,6 @@ public class EnemyController : MonoBehaviour
         targetRotation.x = 0;
         targetRotation.z = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
-
-        if (currentShootingDelay > 0)
-        {
-            currentShootingDelay -= Time.deltaTime;
-        }
-        if (currentShootingDelay <= 0)
-        {
-            currentShootingDelay = shootingDelay;
-            shoot();
-        }
     }
 
     public void damage(float strength)
@@ -58,9 +45,12 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void shoot()
+    void startShootingAll()
     {
-        BulletController newBullet = Instantiate(bullet, transform.position, transform.rotation);
-        newBullet.movementSpeed = shootingSpeed;
+        BulletCreater[] bulletCreaters = GetComponents<BulletCreater>();
+        foreach (BulletCreater bc in bulletCreaters)
+        {
+            bc.shooting = true;
+        }
     }
 }
