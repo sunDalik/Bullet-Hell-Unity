@@ -31,7 +31,8 @@ public class CameraScript : MonoBehaviour
             mousePos = ray.GetPoint(hitDistance);
         }
 
-        Vector3 newPos = new Vector3((mousePos.x + playerPos.x * 2) / 3, player.position.y + height, (mousePos.z + playerPos.z * 2) / 3);
+        float playerPosInfluence = 1.5f;
+        Vector3 newPos = new Vector3((mousePos.x + playerPos.x * playerPosInfluence) / (1 + playerPosInfluence), player.position.y + height, (mousePos.z + playerPos.z * playerPosInfluence) / (1 + playerPosInfluence));
         transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, smoothTime);
 
         if (currentShakeScreenDuration > 0)
