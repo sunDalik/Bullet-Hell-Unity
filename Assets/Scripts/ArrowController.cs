@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowController : PlayerBulletController
+public class ArrowController : BulletController
 {
     public override void move()
     {

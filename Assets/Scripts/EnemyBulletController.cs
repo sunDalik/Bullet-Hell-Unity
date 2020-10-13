@@ -8,14 +8,4 @@ public class EnemyBulletController : BulletController
     {
         transform.Translate(new Vector3(0, 0, 1) * movementSpeed * Time.deltaTime);
     }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Player player = other.gameObject.GetComponent<Player>();
-            player.damage();
-            Destroy(gameObject);
-        }
-    }
 }
