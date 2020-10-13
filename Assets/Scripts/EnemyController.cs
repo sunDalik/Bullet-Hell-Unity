@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     private float maxHealth = 5f;
     private float health;
-    private float shootingDelay = 0.5f;
+    private float shootingDelay = 0.7f;
     private float currentShootingDelay = 0f;
     private float shootingSpeed = 10f;
     public BulletController bullet;

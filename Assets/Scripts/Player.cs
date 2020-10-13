@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float movementSpeed = 0.05f;
+    public float movementSpeed = 0.1f;
     public Shooter weapon;
     public CameraScript cameraObject;
     private int maxHealth = 5;
