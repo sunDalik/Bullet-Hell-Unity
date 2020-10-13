@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6410865190829825762}
   - component: {fileID: 3804944823860863476}
   - component: {fileID: 3419200612379765477}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpiralTowerEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

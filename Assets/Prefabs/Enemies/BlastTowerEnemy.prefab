@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7054362331071427587}
   - component: {fileID: 998734715765426965}
   - component: {fileID: 1613034210686992388}
-  m_Layer: 0
-  m_Name: FastTowerEnemy
+  m_Layer: 10
+  m_Name: BlastTowerEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

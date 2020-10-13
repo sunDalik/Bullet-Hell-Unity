@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2912750994351957337}
   - component: {fileID: 2912750994351957334}
   - component: {fileID: 8741340080269538607}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShotGunEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -142,5 +142,5 @@ MonoBehaviour:
   shooting: 0
   shootingDelay: 0.7
   shootingSpeed: 10
-  bulletAmount: 2
+  bulletAmount: 3
   spreadAngle: 15
