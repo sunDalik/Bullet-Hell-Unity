@@ -27,4 +27,13 @@ public class BulletCreater : MonoBehaviour
     public virtual void shoot()
     {
     }
+
+    protected void afterBulletCreation(BulletController newBullet)
+    {
+        newBullet.movementSpeed = shootingSpeed;
+
+        Vector3 newPosition = newBullet.transform.position;
+        newPosition.y = 0.5f;
+        newBullet.transform.position = newPosition;
+    }
 }

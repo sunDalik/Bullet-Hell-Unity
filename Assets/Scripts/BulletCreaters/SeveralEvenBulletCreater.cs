@@ -22,7 +22,7 @@ public class SeveralEvenBulletCreater : BulletCreater
             BulletController newBullet = Instantiate(bullet);
             newBullet.transform.position = transform.position;
             newBullet.transform.eulerAngles = new Vector3(0, newDegree, 0);
-            newBullet.movementSpeed = shootingSpeed;
+            afterBulletCreation(newBullet);
             newDegree += 360 / bulletAmount;
         }
         initDegree += degreeChange;
