@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float movementSpeed = 0.1f;
+    public float movementSpeed = 7f;
     public Shooter weapon;
     public CameraScript cameraObject;
     private int maxHealth = 5;
@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
         }
 
         Vector3 position = transform.position;
-        position.z += Input.GetAxisRaw("Vertical") * movementSpeed;
-        position.x += Input.GetAxisRaw("Horizontal") * movementSpeed;
+        position.z += Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
+        position.x += Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;
         transform.position = position;
 
         if (Input.GetMouseButton(0))
