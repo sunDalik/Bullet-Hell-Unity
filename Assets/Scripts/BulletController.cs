@@ -33,6 +33,12 @@ public class BulletController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (bulletType == BulletType.player)
         {
             if (other.gameObject.tag == "Enemy")
