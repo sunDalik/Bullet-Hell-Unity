@@ -18,7 +18,6 @@ public class SeveralEvenBulletCreater : BulletCreater
         float newDegree = initDegree;
         for (int i = 0; i < bulletAmount; i++)
         {
-            Debug.Log(newDegree);
             BulletController newBullet = Instantiate(bullet);
             newBullet.transform.position = transform.position;
             newBullet.transform.eulerAngles = new Vector3(0, newDegree, 0);
