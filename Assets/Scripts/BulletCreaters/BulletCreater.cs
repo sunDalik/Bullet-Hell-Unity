@@ -6,15 +6,9 @@ public class BulletCreater : MonoBehaviour
 {
     public BulletController bullet;
     public bool shooting = false;
-    private float shootingDelay = 0.7f;
+    public float shootingDelay = 0.7f;
     private float currentShootingDelay = 0f;
-    protected float shootingSpeed = 10f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public float shootingSpeed = 10f;
 
     // Update is called once per frame
     void Update()

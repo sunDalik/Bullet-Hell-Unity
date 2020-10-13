@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     private float maxHealth = 5f;
     private float health;
+    public bool rotatingToPlayer = true;
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +18,14 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0) return;
-
-        GameObject player = GameObject.FindWithTag("Player");
-        Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
-        targetRotation.x = 0;
-        targetRotation.z = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
+        if (rotatingToPlayer)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
+            targetRotation.x = 0;
+            targetRotation.z = 0;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
+        }
     }
 
     public void damage(float strength)
