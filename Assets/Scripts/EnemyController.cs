@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     private float maxHealth = 5f;
     private float health;
     public bool rotatingToPlayer = true;
+    public ParticleSystem onDamageParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class EnemyController : MonoBehaviour
 
     public void damage(float strength)
     {
+        if (onDamageParticles) onDamageParticles.Play();
         if (health <= 0) return;
         health -= strength;
         if (health <= 0)
