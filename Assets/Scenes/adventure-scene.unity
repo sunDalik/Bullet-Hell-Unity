@@ -10345,7 +10345,7 @@ GameObject:
   - component: {fileID: 2016726108}
   - component: {fileID: 2016726107}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: Test Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10363,7 +10363,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.5
   m_Range: 200
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
