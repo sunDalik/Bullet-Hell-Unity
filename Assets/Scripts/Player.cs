@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private float currentIFrame = 0;
     private const float IFlashPeriod = IFrameTime / 3f;
     private float currentIFlashTime = 0f;
+    public ParticleSystem onDamageParticles;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
         if (currentIFrame > 0) return;
         health--;
         cameraObject.shake();
+        onDamageParticles.Play();
         if (health <= 0)
         {
             die();
