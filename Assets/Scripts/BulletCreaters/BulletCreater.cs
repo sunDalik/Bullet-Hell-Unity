@@ -9,6 +9,7 @@ public class BulletCreater : MonoBehaviour
     public float shootingDelay = 0.7f;
     private float currentShootingDelay = 0f;
     public float shootingSpeed = 10f;
+    public float bulletLifeTime = 8f;
 
     // Update is called once per frame
     void Update()
@@ -31,6 +32,7 @@ public class BulletCreater : MonoBehaviour
     protected void afterBulletCreation(BulletController newBullet)
     {
         newBullet.movementSpeed = shootingSpeed;
+        newBullet.maxLifeTime = bulletLifeTime;
 
         Vector3 newPosition = newBullet.transform.position;
         newPosition.y = 0.5f;

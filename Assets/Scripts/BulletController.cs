@@ -12,7 +12,7 @@ public class BulletController : MonoBehaviour
 {
     public float movementSpeed = 0f;
     private float currentLifeTime = 0f;
-    private float maxLifeTime = 8f;
+    public float maxLifeTime = 8f;
     public float strength = 1f; // only used for players' bullets
     public BulletType bulletType = BulletType.enemy;
 

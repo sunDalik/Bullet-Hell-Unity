@@ -4897,5 +4897,6 @@ MonoBehaviour:
   shooting: 0
   shootingDelay: 1
   shootingSpeed: 15
+  bulletLifeTime: 2
   bulletAmount: 12
   degreeChange: 0

@@ -4898,5 +4898,6 @@ MonoBehaviour:
   shooting: 0
   shootingDelay: 0.7
   shootingSpeed: 10
+  bulletLifeTime: 4
   bulletAmount: 3
   spreadAngle: 15

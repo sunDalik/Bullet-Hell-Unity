@@ -38,10 +38,6 @@ public class EnemyController : MonoBehaviour
         {
             die();
         }
-        else
-        {
-            Debug.Log("hit");
-        }
     }
 
     void die()

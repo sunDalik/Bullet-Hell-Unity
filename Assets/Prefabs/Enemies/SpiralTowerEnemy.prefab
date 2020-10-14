@@ -143,6 +143,7 @@ MonoBehaviour:
   shooting: 0
   shootingDelay: 0.3
   shootingSpeed: 5
+  bulletLifeTime: 5
   bulletAmount: 3
   degreeChange: 20
 --- !u!1 &7730484576647002825
