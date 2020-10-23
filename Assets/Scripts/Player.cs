@@ -38,8 +38,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
-        activeWeapon = weapon1
-;
+        activeWeapon = weapon1;
+        weapon2.setVisibility(false);
     }
 
     void Update()
