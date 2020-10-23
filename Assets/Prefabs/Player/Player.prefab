@@ -162,6 +162,8 @@ MonoBehaviour:
   cameraObject: {fileID: 0}
   onDamageParticles: {fileID: 7233843002368564288, guid: 72c5bb1469a1d4848a380a0f40617e05,
     type: 3}
+  walkingParticles: {fileID: 1314227799250920124, guid: f4a6556f2c4af2e408dbb32994c9dfdd,
+    type: 3}
 --- !u!54 &2875322973105516318
 Rigidbody:
   m_ObjectHideFlags: 0

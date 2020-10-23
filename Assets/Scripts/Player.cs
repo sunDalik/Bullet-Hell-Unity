@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -14,6 +15,9 @@ public class Player : MonoBehaviour
     private const float IFlashPeriod = IFrameTime / 3f;
     private float currentIFlashTime = 0f;
     public ParticleSystem onDamageParticles;
+    public ParticleSystem walkingParticles;
+    private const float walkingParticlesDelay = 0.1f;
+    private float currentWalkingParticlesDelay = walkingParticlesDelay;
 
     void Start()
     {
@@ -34,10 +38,57 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
         }
 
+        Vector3 oldPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
         Vector3 position = transform.position;
         position.z += Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
         position.x += Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;
         transform.position = position;
+
+        if (transform.position.z != oldPos.z || transform.position.x != oldPos.x)
+        {
+            if (currentWalkingParticlesDelay >= walkingParticlesDelay)
+            {
+                List<int> angleYs = new List<int>();
+                float ZMovement = Math.Sign(transform.position.z - oldPos.z);
+                float XMovement = Math.Sign(transform.position.x - oldPos.x);
+                if (ZMovement > 0)
+                {
+                    angleYs.Add(180);
+                }
+                else if (ZMovement < 0)
+                {
+                    angleYs.Add(0);
+                }
+
+                if (XMovement > 0)
+                {
+                    angleYs.Add(-90);
+                }
+                else if (XMovement < 0)
+                {
+                    angleYs.Add(90);
+                }
+
+                float angleY = 0;
+                foreach (int number in angleYs)
+                {
+                    angleY += number;
+                }
+                angleY /= angleYs.Count;
+
+                if (ZMovement > 0 && XMovement > 0)
+                {
+                    angleY = 225;
+                }
+
+                //no idea what I am doing
+                //Basically I determine the angle of walking particles emission here but I couldnt come up with a formula and thus its messy
+
+                Instantiate(walkingParticles, transform.position, Quaternion.Euler(0, angleY, 0));
+                currentWalkingParticlesDelay = 0;
+            }
+        }
 
         if (Input.GetMouseButton(0))
         {
@@ -54,6 +105,7 @@ public class Player : MonoBehaviour
         }
 
         updateIFrames();
+        currentWalkingParticlesDelay += Time.deltaTime;
     }
 
     public void damage()
