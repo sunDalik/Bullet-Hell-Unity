@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyBulletController : BulletController
 {
-    override public void Start(){
-            Vector3 rotation = transform.eulerAngles;
-            rotation.y += 90;
-            transform.eulerAngles = rotation;
+    override public void Start()
+    {
+        base.Start();
+        Vector3 rotation = transform.eulerAngles;
+        rotation.y += 90;
+        transform.eulerAngles = rotation;
     }
 
     public override void move()

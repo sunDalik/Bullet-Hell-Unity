@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4881793146960190}
   - component: {fileID: 33940616089068616}
   - component: {fileID: 23632830525166716}
-  - component: {fileID: 5859166590949480324}
+  - component: {fileID: 8826572402603023522}
   m_Layer: 0
   m_Name: Floor_3Plank_Stone_Small
   m_TagString: Untagged
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5859166590949480324
-MeshCollider:
+--- !u!65 &8826572402603023522
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +90,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1153334707e45dc48a9b08c896e171f7, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.1270773, y: 0.20525, z: 0.9117384}
+  m_Center: {x: 0, y: 0.102625, z: 0}
