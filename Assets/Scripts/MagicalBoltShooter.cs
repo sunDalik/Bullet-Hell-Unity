@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class MagicalBoltShooter : Shooter
 {
-    private float shootingSpeed = 20f;
-    private float ownStrength = 0.3f;
-
     void Start()
     {
-        shootingDelay = 0.15f;
+        shootingDelay = 0.2f;
+        shootingSpeed = 18f;
+        ownStrength = 0.3f;
     }
 
     public override void createBullet()

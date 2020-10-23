@@ -6,7 +6,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float movementSpeed = 10f;
-    public Shooter weapon;
+
+    public Shooter weapon1;
+    public Shooter weapon2;
+    Shooter activeWeapon;
+
     public CameraScript cameraObject;
     private int maxHealth = 5;
     private int health;
@@ -34,6 +38,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
+        activeWeapon = weapon1
+;
     }
 
     void Update()
@@ -103,13 +109,28 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            activeWeapon.setVisibility(false);
+            activeWeapon.shooting = false;
+            if (activeWeapon == weapon1)
+            {
+                activeWeapon = weapon2;
+            }
+            else
+            {
+                activeWeapon = weapon1;
+            }
+            activeWeapon.setVisibility(true);
+        }
+
         if (Input.GetMouseButton(0))
         {
-            weapon.shooting = true;
+            activeWeapon.shooting = true;
         }
         else
         {
-            weapon.shooting = false;
+            activeWeapon.shooting = false;
         }
 
         updateIFrames();

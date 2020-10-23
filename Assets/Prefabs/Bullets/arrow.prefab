@@ -49,7 +49,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1693741834273823253}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -128,7 +128,7 @@ MeshRenderer:
   m_GameObject: {fileID: 3242365817057942819}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -207,7 +207,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4634409154324473176}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -286,7 +286,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4638882378452940707}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -365,7 +365,7 @@ MeshRenderer:
   m_GameObject: {fileID: 5415127799062093815}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -5202,7 +5202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 0
-  maxLifeTime: 8
+  maxLifeTime: 5
   strength: 1
   bulletType: 0
 --- !u!65 &4909849709009398394
@@ -5283,7 +5283,7 @@ MeshRenderer:
   m_GameObject: {fileID: 7909815302261633890}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1

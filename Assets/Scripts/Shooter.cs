@@ -8,8 +8,8 @@ public class Shooter : MonoBehaviour
     public bool shooting = false;
     public float shootingDelay = 0.3f;
     private float currentShootingDelay = 0f;
-    private float shootingSpeed = 30f;
-    private float ownStrength = 1.7f;
+    public float shootingSpeed = 34f;
+    public float ownStrength = 1.7f;
 
     // Update is called once per frame
     void Update()
@@ -35,5 +35,17 @@ public class Shooter : MonoBehaviour
         BulletController newBullet = Instantiate(bullet, transform.position, transform.rotation);
         newBullet.movementSpeed = shootingSpeed;
         newBullet.strength = ownStrength;
+    }
+
+    public void setVisibility(bool visibility)
+    {
+        foreach (Transform child in transform)
+        {
+            Renderer renderer = child.GetComponent<Renderer>();
+            if (renderer)
+            {
+                renderer.enabled = visibility;
+            }
+        }
     }
 }
