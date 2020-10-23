@@ -21,6 +21,7 @@ public class BulletController : MonoBehaviour
     {
         move();
         currentLifeTime += Time.deltaTime;
+
         if (currentLifeTime > maxLifeTime)
         {
             Destroy(gameObject);
