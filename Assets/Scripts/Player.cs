@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float movementSpeed = 7f;
+    public float movementSpeed = 10f;
     public Shooter weapon;
     public CameraScript cameraObject;
     private int maxHealth = 5;
@@ -15,12 +15,24 @@ public class Player : MonoBehaviour
     private const float IFlashPeriod = IFrameTime / 3f;
     private float currentIFlashTime = 0f;
     public ParticleSystem onDamageParticles;
+
     public ParticleSystem walkingParticles;
     private const float walkingParticlesDelay = 0.1f;
     private float currentWalkingParticlesDelay = walkingParticlesDelay;
 
+    private const float dashDelay = 0.8f;
+    private float currentDashDelay = dashDelay;
+    private bool dashing = false;
+    private const float dashTime = 0.185f;
+    private float currentDashTime = 0f;
+    private const float dashSpeed = 38f;
+    private Vector3 dashDir = Vector3.zero;
+
+    Rigidbody rb;
+
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         health = maxHealth;
     }
 
@@ -40,53 +52,54 @@ public class Player : MonoBehaviour
 
         Vector3 oldPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-        Vector3 position = transform.position;
-        position.z += Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
-        position.x += Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;
-        transform.position = position;
-
-        if (transform.position.z != oldPos.z || transform.position.x != oldPos.x)
+        if (Input.GetMouseButton(1) && currentDashDelay >= dashDelay)
         {
-            if (currentWalkingParticlesDelay >= walkingParticlesDelay)
+            dash();
+        }
+
+        if (dashing)
+        {
+            if (currentDashTime < dashTime)
             {
-                List<int> angleYs = new List<int>();
-                float ZMovement = Math.Sign(transform.position.z - oldPos.z);
-                float XMovement = Math.Sign(transform.position.x - oldPos.x);
-                if (ZMovement > 0)
+                float slices = 6;
+                for (int i = 0; i < slices; i++)
                 {
-                    angleYs.Add(180);
+                    float movMultiplier = dashSpeed * Time.deltaTime / slices;
+                    Vector3 destination = transform.position;
+                    destination.x += dashDir.x * movMultiplier;
+                    destination.z += dashDir.z * movMultiplier;
+                    bool intersection = Physics.Linecast(transform.position, destination);
+                    if (intersection)
+                    {
+                        currentDashTime = dashTime;
+                        break;
+                    };
+                    transform.position = destination;
+                    emitWalkingParticles(oldPos);
                 }
-                else if (ZMovement < 0)
-                {
-                    angleYs.Add(0);
-                }
+                currentDashTime += Time.deltaTime;
 
-                if (XMovement > 0)
-                {
-                    angleYs.Add(-90);
-                }
-                else if (XMovement < 0)
-                {
-                    angleYs.Add(90);
-                }
+            }
+            else
+            {
+                dashing = false;
+            }
+        }
+        else
+        {
+            Vector3 position = transform.position;
+            Vector3 movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            position.z += movementVector.z * movementSpeed * Time.deltaTime;
+            position.x += movementVector.x * movementSpeed * Time.deltaTime;
+            transform.position = position;
 
-                float angleY = 0;
-                foreach (int number in angleYs)
+            if (transform.position.z != oldPos.z || transform.position.x != oldPos.x)
+            {
+                if (currentWalkingParticlesDelay >= walkingParticlesDelay)
                 {
-                    angleY += number;
+                    emitWalkingParticles(oldPos);
+                    currentWalkingParticlesDelay = 0;
                 }
-                angleY /= angleYs.Count;
-
-                if (ZMovement > 0 && XMovement > 0)
-                {
-                    angleY = 225;
-                }
-
-                //no idea what I am doing
-                //Basically I determine the angle of walking particles emission here but I couldnt come up with a formula and thus its messy
-
-                Instantiate(walkingParticles, transform.position, Quaternion.Euler(0, angleY, 0));
-                currentWalkingParticlesDelay = 0;
             }
         }
 
@@ -99,13 +112,9 @@ public class Player : MonoBehaviour
             weapon.shooting = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            damage();
-        }
-
         updateIFrames();
         currentWalkingParticlesDelay += Time.deltaTime;
+        currentDashDelay += Time.deltaTime;
     }
 
     public void damage()
@@ -152,5 +161,57 @@ public class Player : MonoBehaviour
     void die()
     {
         Destroy(gameObject);
+    }
+
+    void dash()
+    {
+        float zMovement = Input.GetAxisRaw("Vertical");
+        float xMovement = Input.GetAxisRaw("Horizontal");
+        if (zMovement == 0 && xMovement == 0) return;
+        dashDir = new Vector3(xMovement, 0, zMovement).normalized;
+        dashing = true;
+        currentDashDelay = 0;
+        currentDashTime = 0;
+    }
+
+    void emitWalkingParticles(Vector3 oldPos)
+    {
+        List<int> angleYs = new List<int>();
+        float ZMovement = Math.Sign(transform.position.z - oldPos.z);
+        float XMovement = Math.Sign(transform.position.x - oldPos.x);
+        if (ZMovement > 0)
+        {
+            angleYs.Add(180);
+        }
+        else if (ZMovement < 0)
+        {
+            angleYs.Add(0);
+        }
+
+        if (XMovement > 0)
+        {
+            angleYs.Add(-90);
+        }
+        else if (XMovement < 0)
+        {
+            angleYs.Add(90);
+        }
+
+        float angleY = 0;
+        foreach (int number in angleYs)
+        {
+            angleY += number;
+        }
+        angleY /= angleYs.Count;
+
+        if (ZMovement > 0 && XMovement > 0)
+        {
+            angleY = 225;
+        }
+
+        //no idea what I am doing
+        //Basically I determine the angle of walking particles emission here but I couldnt come up with a formula and thus its messy
+
+        Instantiate(walkingParticles, transform.position, Quaternion.Euler(0, angleY, 0));
     }
 }
