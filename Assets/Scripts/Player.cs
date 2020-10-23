@@ -61,7 +61,10 @@ public class Player : MonoBehaviour
         if (currentIFrame > 0) return;
         health--;
         cameraObject.shake();
-        onDamageParticles.Play();
+        if (onDamageParticles)
+        {
+            Instantiate(onDamageParticles, transform.position, new Quaternion());
+        }
         if (health <= 0)
         {
             die();

@@ -31,7 +31,10 @@ public class EnemyController : MonoBehaviour
 
     public void damage(float strength)
     {
-        if (onDamageParticles) onDamageParticles.Play();
+        if (onDamageParticles)
+        {
+            Instantiate(onDamageParticles, transform.position, new Quaternion());
+        }
         if (health <= 0) return;
         health -= strength;
         if (health <= 0)
