@@ -6,10 +6,10 @@ public class Shooter : MonoBehaviour
 {
     public BulletController bullet;
     public bool shooting = false;
-    private float shootingDelay = 0.3f;
+    public float shootingDelay = 0.3f;
     private float currentShootingDelay = 0f;
     private float shootingSpeed = 30f;
-    private float ownStrength = 1f;
+    private float ownStrength = 1.7f;
 
     // Update is called once per frame
     void Update()
@@ -30,7 +30,7 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    private void createBullet()
+    public virtual void createBullet()
     {
         BulletController newBullet = Instantiate(bullet, transform.position, transform.rotation);
         newBullet.movementSpeed = shootingSpeed;
