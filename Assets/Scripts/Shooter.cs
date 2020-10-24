@@ -7,7 +7,7 @@ public class Shooter : MonoBehaviour
     public BulletController bullet;
     public bool shooting = false;
     public float shootingDelay = 0.3f;
-    private float currentShootingDelay = 0f;
+    public float currentShootingDelay = 0f;
     public float shootingSpeed = 34f;
     public float ownStrength = 1.7f;
     bool tilted = false;

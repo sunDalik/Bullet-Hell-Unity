@@ -122,6 +122,10 @@ public class Player : MonoBehaviour
                 activeWeapon = weapon1;
             }
             activeWeapon.setVisibility(true);
+            if (activeWeapon.currentShootingDelay < activeWeapon.shootingDelay / 2)
+            {
+                activeWeapon.currentShootingDelay = activeWeapon.shootingDelay / 2;
+            }
         }
 
         if (Input.GetMouseButton(0))
