@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     Shooter activeWeapon;
 
     public CameraScript cameraObject;
-    private int maxHealth = 5;
+    private int maxHealth = 6;
     private int health;
     private const float IFrameTime = 0.7f;
     private float currentIFrame = 0;
@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     private const float dashSpeed = 38f;
     private Vector3 dashDir = Vector3.zero;
 
+    public PlayerHUD HUD;
+
     Rigidbody rb;
 
     void Start()
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
         health = maxHealth;
         activeWeapon = weapon1;
         weapon2.setVisibility(false);
+        redrawHealth();
     }
 
     void Update()
@@ -159,6 +162,7 @@ public class Player : MonoBehaviour
         {
             currentIFrame = IFrameTime;
         }
+        redrawHealth();
     }
 
     void updateIFrames()
@@ -238,5 +242,34 @@ public class Player : MonoBehaviour
         //Basically I determine the angle of walking particles emission here but I couldnt come up with a formula and thus its messy
 
         Instantiate(walkingParticles, transform.position, Quaternion.Euler(0, angleY, 0));
+    }
+
+    void redrawHealth()
+    {
+        foreach (Transform child in HUD.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        for (int i = 1; i <= maxHealth; i += 2)
+        {
+            CanvasRenderer heartSprite = HUD.fullHeartSprite;
+            if (health == i)
+            {
+                heartSprite = HUD.halfHeartSprite;
+            }
+            else if (health < i)
+            {
+                heartSprite = HUD.emptyHeartSprite;
+            }
+
+            CanvasRenderer newHeartSprite = Instantiate(heartSprite, HUD.transform);
+
+            RectTransform newHeartRect = newHeartSprite.GetComponent<RectTransform>();
+            Vector3 pos = newHeartRect.anchoredPosition;
+            pos.x = newHeartRect.rect.width / 2 + 7 + newHeartRect.rect.width * 1.03f * ((i - 1) / 2);
+            pos.y = -newHeartRect.rect.height / 2 - 5;
+            newHeartRect.anchoredPosition = pos;
+        }
     }
 }

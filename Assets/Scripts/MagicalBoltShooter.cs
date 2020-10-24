@@ -8,7 +8,7 @@ public class MagicalBoltShooter : Shooter
     {
         shootingDelay = 0.2f;
         shootingSpeed = 18f;
-        ownStrength = 0.3f;
+        ownStrength = 0.45f;
     }
 
     public override void createBullet()
