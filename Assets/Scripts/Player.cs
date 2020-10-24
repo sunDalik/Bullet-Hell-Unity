@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
                         break;
                     };
                     transform.position = destination;
-                    emitWalkingParticles(oldPos);
+                    emitWalkingParticles(oldPos, true);
                 }
                 currentDashTime += Time.deltaTime;
 
@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
         currentDashTime = 0;
     }
 
-    void emitWalkingParticles(Vector3 oldPos)
+    void emitWalkingParticles(Vector3 oldPos, bool dash = false)
     {
         List<int> angleYs = new List<int>();
         float ZMovement = Math.Sign(transform.position.z - oldPos.z);
@@ -241,7 +241,11 @@ public class Player : MonoBehaviour
         //no idea what I am doing
         //Basically I determine the angle of walking particles emission here but I couldnt come up with a formula and thus its messy
 
-        Instantiate(walkingParticles, transform.position, Quaternion.Euler(0, angleY, 0));
+        ParticleSystem particleSystem = Instantiate(walkingParticles, transform.position, Quaternion.Euler(0, angleY, 0));
+        if (dash)
+        {
+            particleSystem.emission.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0, 1) });
+        }
     }
 
     void redrawHealth()
