@@ -10,6 +10,9 @@ public class Shooter : MonoBehaviour
     private float currentShootingDelay = 0f;
     public float shootingSpeed = 34f;
     public float ownStrength = 1.7f;
+    bool tilted = false;
+    private float tiltDelay = 0;
+    float tiltAngle = 25;
 
     // Update is called once per frame
     void Update()
@@ -19,6 +22,10 @@ public class Shooter : MonoBehaviour
             currentShootingDelay -= Time.deltaTime;
         }
 
+        if (tiltDelay >= shootingDelay / 2 && tilted)
+        {
+            untilt();
+        }
 
         if (shooting)
         {
@@ -26,8 +33,11 @@ public class Shooter : MonoBehaviour
             {
                 currentShootingDelay = shootingDelay;
                 createBullet();
+                tilt();
             }
         }
+
+        tiltDelay += Time.deltaTime;
     }
 
     public virtual void createBullet()
@@ -46,6 +56,30 @@ public class Shooter : MonoBehaviour
             {
                 renderer.enabled = visibility;
             }
+        }
+    }
+
+    void tilt()
+    {
+        if (!tilted)
+        {
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y += tiltAngle;
+            Vector3 currentVelocity = Vector3.one;
+            transform.eulerAngles = rotation;
+            tiltDelay = 0;
+            tilted = true;
+        }
+    }
+
+    void untilt()
+    {
+        if (tilted)
+        {
+            Vector3 rotation = transform.eulerAngles;
+            rotation.y -= tiltAngle;
+            transform.eulerAngles = rotation;
+            tilted = false;
         }
     }
 }
