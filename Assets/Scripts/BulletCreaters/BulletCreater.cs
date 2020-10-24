@@ -18,7 +18,7 @@ public class BulletCreater : MonoBehaviour
         {
             currentShootingDelay -= Time.deltaTime;
         }
-        if (currentShootingDelay <= 0)
+        if (currentShootingDelay <= 0 && shooting)
         {
             currentShootingDelay = shootingDelay;
             shoot();

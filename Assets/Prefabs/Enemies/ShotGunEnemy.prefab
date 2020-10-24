@@ -112,6 +112,7 @@ MonoBehaviour:
   rotatingToPlayer: 1
   onDamageParticles: {fileID: 6167835605819767853, guid: ebd849fa6dc77d143a048130bd3c7751,
     type: 3}
+  noticeRange: 20
 --- !u!54 &2912750994351957334
 Rigidbody:
   m_ObjectHideFlags: 0

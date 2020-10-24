@@ -8,25 +8,29 @@ public class EnemyController : MonoBehaviour
     private float health;
     public bool rotatingToPlayer = true;
     public ParticleSystem onDamageParticles;
+    public float noticeRange = 20f;
+    private BulletCreater[] bulletCreaters;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
-        startShootingAll();
+        bulletCreaters = GetComponents<BulletCreater>();
+        decideShooting(GameObject.FindWithTag("Player"));
     }
 
     // Update is called once per frame
     void Update()
     {
+        GameObject player = GameObject.FindWithTag("Player");
         if (rotatingToPlayer)
         {
-            GameObject player = GameObject.FindWithTag("Player");
             Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
             targetRotation.x = 0;
             targetRotation.z = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
         }
+        decideShooting(player);
     }
 
     public void damage(float strength)
@@ -48,12 +52,23 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void startShootingAll()
+    void decideShooting(GameObject player)
     {
-        BulletCreater[] bulletCreaters = GetComponents<BulletCreater>();
+        if (Vector3.Distance(transform.position, player.transform.position) <= noticeRange)
+        {
+            setShootingMode(true);
+        }
+        else
+        {
+            setShootingMode(false);
+        }
+    }
+
+    void setShootingMode(bool shooting)
+    {
         foreach (BulletCreater bc in bulletCreaters)
         {
-            bc.shooting = true;
+            bc.shooting = shooting;
         }
     }
 }
