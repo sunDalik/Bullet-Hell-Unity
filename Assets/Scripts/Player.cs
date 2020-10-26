@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         activeWeapon = weapon1;
         weapon2.setVisibility(false);
         redrawHealth();
+        cameraObject.centerCameraOnPlayer(0);
     }
 
     void Update()
@@ -190,6 +191,7 @@ public class Player : MonoBehaviour
     void die()
     {
         Destroy(gameObject);
+        //GetComponent<Renderer>().enabled = false;
     }
 
     void dash()
@@ -275,5 +277,9 @@ public class Player : MonoBehaviour
             pos.y = -newHeartRect.rect.height / 2 - 5;
             newHeartRect.anchoredPosition = pos;
         }
+    }
+
+    public bool isDead(){
+        return health <= 0;
     }
 }
