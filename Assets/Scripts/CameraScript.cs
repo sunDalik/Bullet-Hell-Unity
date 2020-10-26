@@ -30,14 +30,11 @@ public class CameraScript : MonoBehaviour
 
     public void centerCameraOnPlayer(float smoothTime)
     {
-        if (player.isDead())
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("adventure-scene"); //Load scene called Game
-            }
-            return;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("adventure-scene");
         }
+        if (player.isDead()) return;
         Vector3 playerPos = player.transform.position;
         Vector3 mousePos = player.transform.position; // default value in case we don't detect mouse position
         Plane playerPlane = new Plane(Vector3.up, player.transform.position);
