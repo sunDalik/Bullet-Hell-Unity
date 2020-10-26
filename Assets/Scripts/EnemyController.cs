@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         GameObject player = GameObject.FindWithTag("Player");
+        if(player == null) return;
         if (rotatingToPlayer)
         {
             Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
