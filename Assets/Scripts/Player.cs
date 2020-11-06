@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     private const float dashSpeed = 38f;
     private Vector3 dashDir = Vector3.zero;
 
+    private bool inWater = false;
+
     public PlayerHUD HUD;
 
     Rigidbody rb;
@@ -74,7 +76,7 @@ public class Player : MonoBehaviour
                 float slices = 6;
                 for (int i = 0; i < slices; i++)
                 {
-                    float movMultiplier = dashSpeed * Time.deltaTime / slices;
+                    float movMultiplier = dashSpeed * getSpeedMultiplier() * Time.deltaTime / slices;
                     Vector3 destination = transform.position;
                     destination.x += dashDir.x * movMultiplier;
                     destination.z += dashDir.z * movMultiplier;
@@ -99,8 +101,8 @@ public class Player : MonoBehaviour
         {
             Vector3 position = transform.position;
             Vector3 movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-            position.z += movementVector.z * movementSpeed * Time.deltaTime;
-            position.x += movementVector.x * movementSpeed * Time.deltaTime;
+            position.z += movementVector.z * movementSpeed * getSpeedMultiplier() * Time.deltaTime;
+            position.x += movementVector.x * movementSpeed * getSpeedMultiplier() * Time.deltaTime;
             transform.position = position;
 
             if (transform.position.z != oldPos.z || transform.position.x != oldPos.x)
@@ -279,7 +281,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool isDead(){
+    float getSpeedMultiplier()
+    {
+        if (inWater) return 0.65f;
+        else return 1;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 4)
+        {
+            inWater = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 4)
+        {
+            inWater = false;
+        }
+    }
+
+    public bool isDead()
+    {
         return health <= 0;
     }
 }
