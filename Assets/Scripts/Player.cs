@@ -209,6 +209,7 @@ public class Player : MonoBehaviour
 
     void emitWalkingParticles(Vector3 oldPos, bool dash = false)
     {
+        if (inWater) return;
         List<int> angleYs = new List<int>();
         float ZMovement = Math.Sign(transform.position.z - oldPos.z);
         float XMovement = Math.Sign(transform.position.x - oldPos.x);
@@ -250,6 +251,14 @@ public class Player : MonoBehaviour
         {
             particleSystem.emission.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0, 1) });
         }
+
+        IEnumerator DestroyParticles()
+        {
+            yield return new WaitForSeconds(2f);
+            Destroy(particleSystem);
+        }
+
+        StartCoroutine(DestroyParticles());
     }
 
     void redrawHealth()
@@ -283,7 +292,7 @@ public class Player : MonoBehaviour
 
     float getSpeedMultiplier()
     {
-        if (inWater) return 0.65f;
+        if (inWater) return 0.6f;
         else return 1;
     }
 
