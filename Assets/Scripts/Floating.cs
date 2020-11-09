@@ -17,12 +17,6 @@ public class Floating : MonoBehaviour
     {
         if (inWater)
         {
-
-            Vector3 pos = transform.position;
-            float waterY = currentWater.transform.position.y;
-            pos.y = waterY;
-            //transform.position = pos;
-
             if (transform.position.y < currentWater.transform.position.y)
             {
                 rb.AddForce(new Vector3(0, 25f * rb.mass, 0), ForceMode.Force);
